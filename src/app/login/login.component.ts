@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import firebase from 'firebase/compat/app';
-import {Router} from "@angular/router"
+import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -13,7 +11,7 @@ export class LoginComponent implements OnInit {
   /* AQUI DEFINIMOS LA TEMATICA DE NUESTRA IMAGEN*/
   styleImage = 'gym';
   form: FormGroup;
-  constructor(private formBuilder: FormBuilder, public auth: AngularFireAuth, private router: Router) {
+  constructor(private formBuilder: FormBuilder, public authService: AuthService) {
 
   }
 
@@ -41,9 +39,7 @@ export class LoginComponent implements OnInit {
     event.preventDefault();
     if (this.form.valid) {
       const value = this.form.value;
-      this.auth.signInWithEmailAndPassword(value.email, value.password).then(r => {
-        this.router.navigateByUrl('dashboard')
-      } )
+      this.authService.login(value.email, value.password)
     } else {
       console.log('formulario no valido');
     }

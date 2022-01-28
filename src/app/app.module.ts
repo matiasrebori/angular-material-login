@@ -12,12 +12,14 @@ import { LoginComponent } from './login/login.component'
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
