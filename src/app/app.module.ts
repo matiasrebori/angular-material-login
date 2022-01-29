@@ -13,13 +13,17 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from '../environments/environment';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MenuComponent } from './menu/menu.component';
+/* animations */
+import {NgxSpinnerModule} from "ngx-spinner";
+import { ClientesListadoComponent } from './clientes-listado/clientes-listado.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     DashboardComponent,
-    MenuComponent
+    MenuComponent,
+    ClientesListadoComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,8 @@ import { MenuComponent } from './menu/menu.component';
     FormsModule,
     ReactiveFormsModule,
     MaterialModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    NgxSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

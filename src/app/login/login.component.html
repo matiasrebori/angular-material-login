@@ -30,7 +30,8 @@
             Password is <strong>required</strong>
           </mat-error>
         </mat-form-field>
-        <button mat-raised-button color="warn" type="submit" >Ingresar</button>
+
+        <button mat-raised-button color="warn" type="submit">Ingresar</button>
       </form>
       <div class="mt-3">
         <a class="forgot-link" routerLink="/forgot-password">forgot password?</a>
@@ -44,7 +45,16 @@
        fxLayoutAlign="end start"
        [ngStyle]="unsplashClass()">
     <div class="login-aside-overlay"></div>
-<!--    <h1 class="login-welcome-text">Welcome!</h1>-->
-<!--    <hr class="login-aside-hr">-->
+    <!--    <h1 class="login-welcome-text">Welcome!</h1>-->
+    <!--    <hr class="login-aside-hr">-->
   </div>
 </div>
+
+<ngx-spinner
+  bdColor="rgba(0,0,0,0.8)"
+  size="medium"
+  color="#ff4081"
+  type="ball-atom"
+  [fullScreen]="true">
+  <p style="color: white"> Iniciando Sesion </p>
+</ngx-spinner>
