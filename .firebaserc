@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "gym-angular-92b3e": {
+      "hosting": {
+        "angular-login": [
+          "gym-angular-92b3e"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "gym-angular-92b3e"
+  }
+}
