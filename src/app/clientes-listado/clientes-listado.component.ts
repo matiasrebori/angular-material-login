@@ -3,8 +3,8 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Cliente} from "../models";
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
+import {ClientesService} from "../services/clientes.service";
 
 @Component({
   selector: 'app-clientes-listado',
@@ -51,34 +51,31 @@ export class ClientesListadoComponent implements OnInit {
     },
   ];
   dataSource: MatTableDataSource<Cliente>;
-  private itemsCollection: AngularFirestoreCollection<any>;
   items: Observable<any[]>;
+  cliente: Cliente;
   clientesListado: Cliente[] = new Array<Cliente>();
+  arr: any[] = new Array<any>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private afs: AngularFirestore) {
-    this.itemsCollection = afs.collection<any>('clientes');
-    this.items = this.itemsCollection.valueChanges();
-    this.items.subscribe(resultado => {
-      resultado.forEach(item =>{
-        item.fechaNacimiento = item.fechaNacimiento.toDate().toDateString();
-        this.clientesListado.push(item)
-      })
-      console.log(this.clientesListado);
+  constructor(private clientesService: ClientesService) {
+  }
+
+  ngOnInit(): void {
+    this.items = this.clientesService.getAllNaive();
+    this.items.subscribe(res => {
+      res.map((value) => {
+        value.fechaNacimiento = value.fechaNacimiento.toDate().toLocaleDateString("es-MX");
+      });
+      this.clientesListado = res;
       this.dataSource = new MatTableDataSource(this.clientesListado);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
 
   }
 
-  ngOnInit(): void {
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -97,7 +94,6 @@ export class ClientesListadoComponent implements OnInit {
 
 const ELEMENT_DATA: Cliente[] = [
   {id: '1', nombre: 'Miguel Angel ', apellido: 'Rodriguez Armoa', correo: 'marmoa@gmail.com', fechaNacimiento: new Date(''), telefono: '0981425154', cedula: '5456874', visible: true },
-
 ];
 
 
