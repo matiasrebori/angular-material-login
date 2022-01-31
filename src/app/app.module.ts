@@ -16,6 +16,8 @@ import { MenuComponent } from './menu/menu.component';
 /* animations */
 import {NgxSpinnerModule} from "ngx-spinner";
 import { ClientesListadoComponent } from './clientes-listado/clientes-listado.component';
+import { ClientesAgregarComponent } from './clientes-agregar/clientes-agregar.component';
+import {MAT_DATE_LOCALE} from "@angular/material/core";
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { ClientesListadoComponent } from './clientes-listado/clientes-listado.co
     LoginComponent,
     DashboardComponent,
     MenuComponent,
-    ClientesListadoComponent
+    ClientesListadoComponent,
+    ClientesAgregarComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,9 @@ import { ClientesListadoComponent } from './clientes-listado/clientes-listado.co
     AngularFireModule.initializeApp(environment.firebase),
     NgxSpinnerModule
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'es-mx'},
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

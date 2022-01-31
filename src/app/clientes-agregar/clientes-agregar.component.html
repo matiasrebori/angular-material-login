@@ -1,0 +1,77 @@
+<app-menu></app-menu>
+
+<div class="container">
+  <div class="row text-center my-3">
+    <h1>Agregar Cliente</h1>
+  </div>
+  <mat-card class="mat-elevation-z8">
+    <form class="example-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <!--Columna 1-->
+        <div class="col">
+          <!--Nombre-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" formControlName="nombre">
+<!--            <mat-error *ngIf="form.controls['nombre'].hasError('required') && form.controls['nombre'].dirty">-->
+<!--              Nombre es requerido-->
+<!--            </mat-error>-->
+          </mat-form-field>
+          <!--Apellido-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Apellido</mat-label>
+            <input matInput type="text" formControlName="apellido">
+            <mat-error *ngIf="form.controls['apellido'].hasError('required')">
+              Apellido es requerido
+            </mat-error>
+          </mat-form-field>
+          <!--Correo-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Correo</mat-label>
+            <input matInput type="email" formControlName="correo">
+            <mat-error *ngIf="form.controls['correo'].hasError('required')">
+              Correo es requerido
+            </mat-error>
+            <mat-error *ngIf="form.controls['correo'].hasError('email')">
+              Por favor ingrese un email valido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <!--Columna 2-->
+        <div class="col">
+          <!--Fecha de Nacimiento-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Fecha de Nacimiento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="form.controls['fechaNacimiento'].hasError('required')">
+              Ingrese una fecha valida
+            </mat-error>
+          </mat-form-field>
+          <!--Telefono-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Telefono</mat-label>
+            <input matInput type="text" formControlName="telefono">
+            <mat-error *ngIf="form.controls['telefono'].hasError('required')">
+              Telefono es requerido
+            </mat-error>
+          </mat-form-field>
+          <!--Cedula-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Cedula</mat-label>
+            <input matInput type="text" formControlName="cedula">
+            <mat-error *ngIf="form.controls['cedula'].hasError('required')">
+              Cedula es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button mat-raised-button color="primary" type="submit" class="example-full-width">Guardar</button>
+        </div>
+      </div>
+    </form>
+  </mat-card>
+</div>
