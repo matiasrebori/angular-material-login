@@ -1,14 +1,6 @@
-table {
-  width: 100%;
-}
-
 .mat-form-field {
   font-size: 14px;
   width: 100%;
-}
-
-td, th {
-  width: 14%;
 }
 
 .mat-row:hover .mat-cell {
@@ -21,6 +13,45 @@ td, th {
   cursor: pointer;
 }
 
-.mat-elevation-z8{
-  overflow-x:auto;
+/* tabla "responsive" */
+.example-container {
+  overflow: auto;
+}
+
+.mat-header-cell,
+.mat-footer-cell,
+.mat-cell {
+  min-width: 80px;
+  box-sizing: border-box;
+}
+
+.mat-header-row,
+.mat-footer-row,
+.mat-row {
+  min-width: 1200px;
+}
+
+@media (max-width: 1200px) {
+  .mat-header-row,
+  .mat-footer-row,
+  .mat-row {
+    min-width: 1200px;
+  }
+
+}
+
+@media (max-width: 992px) {
+  .mat-header-row,
+  .mat-footer-row,
+  .mat-row {
+    min-width: 1200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mat-header-row,
+  .mat-footer-row,
+  .mat-row {
+    min-width: 1200px;
+  }
 }
