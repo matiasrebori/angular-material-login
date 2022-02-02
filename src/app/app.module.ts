@@ -18,6 +18,8 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import { ClientesListadoComponent } from './clientes-listado/clientes-listado.component';
 import { ClientesAgregarComponent } from './clientes-agregar/clientes-agregar.component';
 import {MAT_DATE_LOCALE} from "@angular/material/core";
+import { ClientesDashboardComponent } from './clientes-dashboard/clientes-dashboard.component';
+import { ClientesModalComponent } from './clientes-modal/clientes-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
     DashboardComponent,
     MenuComponent,
     ClientesListadoComponent,
-    ClientesAgregarComponent
+    ClientesAgregarComponent,
+    ClientesDashboardComponent,
+    ClientesModalComponent
   ],
   imports: [
     BrowserModule,

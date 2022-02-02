@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ClientesService} from "../services/clientes.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-clientes-agregar',
@@ -25,11 +26,24 @@ export class ClientesAgregarComponent implements OnInit {
     telefono: new FormControl(''),
     cedula: new FormControl(''),
   });
+  esEditar: boolean = false;
+  id: string;
 
-  constructor(private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private clienteService: ClientesService) {
+  constructor(private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private clienteService: ClientesService, private activeRoute: ActivatedRoute,) {
   }
 
   ngOnInit(): void {
+    // iniciar form
+    this.iniciarForm()
+    //si existe id significa que se va a editar el cliente
+    this.id = this.activeRoute.snapshot.params['clienteID'];
+    if (this.id != undefined) {
+      this.editar()
+    }
+
+  }
+
+  iniciarForm(){
     this.form = this.formBuilder.group(
       {
         nombre: ['', Validators.required],
@@ -42,6 +56,22 @@ export class ClientesAgregarComponent implements OnInit {
     );
   }
 
+  editar(){
+    this.esEditar = true;
+    //traer el cliente y poner datos en form
+    this.clienteService.get(this.id).subscribe((cliente) => {
+      this.form.setValue(
+        {
+          nombre: cliente.nombre,
+          apellido: cliente.apellido,
+          correo: cliente.correo,
+          fechaNacimiento: new Date(cliente.fechaNacimiento.toDate()),
+          telefono: cliente.telefono,
+          cedula: cliente.cedula,
+        })
+    });
+  }
+
   onSubmit(): void {
     if (this.form.valid) {
       this.clienteService.create(this.form.value).then(r => {
@@ -49,13 +79,24 @@ export class ClientesAgregarComponent implements OnInit {
         //reset form
         this.formGroupDirective.resetForm();
         //notificacion
-        this.openSnackBar()
+        this.openSnackBar('Cliente Guardado!')
       })
     }
   }
 
-  openSnackBar() {
-    this._snackBar.open('Cliente Guardado!', '', {
+  onEdit(): void {
+    if (this.form.valid) {
+      this.clienteService.update(this.id, this.form.value).then(() => {
+          console.log('actualizado')
+        this.openSnackBar('Cliente Actualizado!')
+        })
+    } else {
+      console.log('form invalido')
+    }
+  }
+
+  openSnackBar(mensaje: string) {
+    this._snackBar.open(mensaje, '', {
       horizontalPosition: 'center',
       verticalPosition: 'top',
       duration: 2000,

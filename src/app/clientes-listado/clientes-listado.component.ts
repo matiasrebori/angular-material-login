@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Output, EventEmitter} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -56,14 +56,16 @@ export class ClientesListadoComponent implements OnInit {
   clientesListado: Cliente[] = new Array<Cliente>();
   arr: any[] = new Array<any>();
 
+  @Output() enviarclienteID: EventEmitter<string> = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private clientesService: ClientesService) {
+  constructor(private clientesService: ClientesService,) {
   }
 
   ngOnInit(): void {
-    this.items = this.clientesService.getAllNaive();
+    // this.items = this.clientesService.getAllNaive();
+    this.items = this.clientesService.getAll();
     this.items.subscribe(res => {
       res.map((value) => {
         value.fechaNacimiento = value.fechaNacimiento.toDate().toLocaleDateString("es-MX");
@@ -86,8 +88,9 @@ export class ClientesListadoComponent implements OnInit {
     }
   }
 
-  log(row:Cliente){
-    console.log(row)
+  //enviar a editar
+  emitirEvento(row:Cliente){
+    this.enviarclienteID.emit(row.id)
   }
 
 }

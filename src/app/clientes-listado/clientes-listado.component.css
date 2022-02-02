@@ -28,7 +28,7 @@
 .mat-header-row,
 .mat-footer-row,
 .mat-row {
-  min-width: 1200px;
+  min-width: 1920px;
 }
 
 @media (max-width: 1200px) {

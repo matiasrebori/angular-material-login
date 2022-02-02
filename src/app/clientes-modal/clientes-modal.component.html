@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Acciones</h1>
+<mat-dialog-content>
+  <button mat-flat-button color="primary">Detalle</button><br><br>
+  <button routerLink="/clientes-agregar/{{data.id}}" (click)="cerrarModal()" mat-flat-button color="accent">Editar</button><br><br>
+  <button mat-flat-button color="warn">Eliminar</button>
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
