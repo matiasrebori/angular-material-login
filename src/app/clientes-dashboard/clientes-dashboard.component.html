@@ -1,1 +1,23 @@
+<app-menu></app-menu>
+<div class="container-fluid">
+  <div class="row text-center mt-3">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+    <h1>Clientes</h1>
+    </div>
+    <div class="col-4">
+    </div>
+  </div>
+  <div class="row text-center mb-4">
+    <div class="col-4">
+    </div>
+    <div class="col-4">
+      <button routerLink="/clientes-agregar" mat-flat-button color="primary">Agregar Cliente</button>
+    </div>
+    <div class="col-4">
+    </div>
+  </div>
+
+</div>
 <app-clientes-listado (enviarclienteID)="mostrarModal($event)"></app-clientes-listado>

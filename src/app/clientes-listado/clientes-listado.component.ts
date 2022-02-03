@@ -3,7 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {Cliente} from "../models";
-import { Observable } from 'rxjs';
+import {Observable} from 'rxjs';
 import {ClientesService} from "../services/clientes.service";
 
 @Component({
@@ -12,7 +12,7 @@ import {ClientesService} from "../services/clientes.service";
   styleUrls: ['./clientes-listado.component.css']
 })
 export class ClientesListadoComponent implements OnInit {
-  displayedColumns: string[] = ['nombre', 'apellido', 'correo', 'fechaNacimiento', 'telefono', 'cedula', 'visible'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'correo', 'fechaNacimiento', 'telefono', 'cedula'];
   columns = [
     {
       columnDef: 'nombre',
@@ -52,9 +52,8 @@ export class ClientesListadoComponent implements OnInit {
   ];
   dataSource: MatTableDataSource<Cliente>;
   items: Observable<any[]>;
-  cliente: Cliente;
   clientesListado: Cliente[] = new Array<Cliente>();
-  arr: any[] = new Array<any>();
+  isLoadingResults: boolean;
 
   @Output() enviarclienteID: EventEmitter<string> = new EventEmitter();
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -64,7 +63,9 @@ export class ClientesListadoComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.items = this.clientesService.getAllNaive();
+    //mostrar spinner
+    this.isLoadingResults = true;
+
     this.items = this.clientesService.getAll();
     this.items.subscribe(res => {
       res.map((value) => {
@@ -74,11 +75,13 @@ export class ClientesListadoComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.clientesListado);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      //ocultar spinner
+      this.isLoadingResults = false;
     })
 
   }
 
-
+  //filtro de tabla
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -89,14 +92,23 @@ export class ClientesListadoComponent implements OnInit {
   }
 
   //enviar a editar
-  emitirEvento(row:Cliente){
+  emitirEvento(row: Cliente) {
     this.enviarclienteID.emit(row.id)
   }
 
 }
 
 const ELEMENT_DATA: Cliente[] = [
-  {id: '1', nombre: 'Miguel Angel ', apellido: 'Rodriguez Armoa', correo: 'marmoa@gmail.com', fechaNacimiento: new Date(''), telefono: '0981425154', cedula: '5456874', visible: true },
+  {
+    id: '1',
+    nombre: 'Miguel Angel ',
+    apellido: 'Rodriguez Armoa',
+    correo: 'marmoa@gmail.com',
+    fechaNacimiento: new Date(''),
+    telefono: '0981425154',
+    cedula: '5456874',
+    visible: true
+  },
 ];
 
 

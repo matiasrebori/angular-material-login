@@ -22,13 +22,12 @@ export class ClientesDashboardComponent implements OnInit {
   }
 
   openDialog(id:string) {
-    const dialogRef = this.dialog.open(ClientesModalComponent, {
+    this.dialog.open(ClientesModalComponent, {
       data: { id:id },
+      // height: '400px',
+      width: '250px',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
   }
 
 }

@@ -1,42 +1,53 @@
-<app-menu></app-menu>
-<div class="container">
-  <div class="row text-center my-3">
-    <h1>Clientes</h1>
-  </div>
+<div class="container-fluid">
+
   <div class="row">
     <div class="col">
-    <mat-card class="mat-elevation-z8">
-      <mat-card-content>
-        <mat-form-field appearance="standard">
-          <mat-label>Filter</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-        </mat-form-field>
+      <mat-card class="mat-elevation-z8">
+        <mat-card-content>
+          <div class="row align-items-center">
+            <div class="col-11">
+              <mat-form-field appearance="standard">
+                <mat-label>Filtrar</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+              </mat-form-field>
+            </div>
+            <div class="col-1 text-center">
+              <mat-icon matTooltip="Haz click en una columna para realizar una accion">
+                info
+              </mat-icon>
+            </div>
+          </div>
 
-        <div class="example-container mat-elevation-z2">
-          <mat-table mat-table [dataSource]="dataSource" matSort >
-            <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-              <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>
-                {{column.header}}
-              </mat-header-cell>
-              <mat-cell mat-cell *matCellDef="let row">
-                {{column.cell(row)}}
-              </mat-cell>
-            </ng-container>
+          <div class="example-container mat-elevation-z2">
+            <div class="example-loading-shade"
+                 *ngIf="isLoadingResults">
+              <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+            </div>
+            <mat-table mat-table [dataSource]="dataSource" matSort>
+
+              <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+                <mat-header-cell mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{column.header}}
+                </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let row">
+                  {{column.cell(row)}}
+                </mat-cell>
+              </ng-container>
 
 
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row (click)="emitirEvento(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row (click)="emitirEvento(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-            <!-- Row shown when there is no matching data. -->
-<!--            <tr class="mat-row" *matNoDataRow>-->
-<!--              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>-->
-<!--            </tr>-->
-          </mat-table>
+              <!-- Row shown when there is no matching data. -->
+              <!--            <tr class="mat-row" *matNoDataRow>-->
+              <!--              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>-->
+              <!--            </tr>-->
+            </mat-table>
 
-          <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-        </div>
-      </mat-card-content>
-    </mat-card>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+          </div>
+        </mat-card-content>
+      </mat-card>
     </div>
   </div>
 </div>
