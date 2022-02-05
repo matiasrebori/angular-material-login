@@ -14,3 +14,18 @@ export class Cliente{
   {
   }
 }
+
+export class Precios{
+  id: string;
+  duracion: number;
+  nombre: string;
+  tipoDuracion: number;
+  costo: number;
+  // ref: DocumentReference;
+  constructor()
+  {
+
+  }
+
+}
+

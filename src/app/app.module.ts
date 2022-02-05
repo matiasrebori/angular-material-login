@@ -25,6 +25,9 @@ import {MAT_DATE_LOCALE} from "@angular/material/core";
 /* notifications */
 import {NgxAwesomePopupModule, ConfirmBoxConfigModule, DialogConfigModule, ToastNotificationConfigModule} from "@costlydeveloper/ngx-awesome-popup";
 import { HotToastModule } from '@ngneat/hot-toast';
+import { PreciosDashboardComponent } from './precios-dashboard/precios-dashboard.component';
+import { PreciosListadoComponent } from './precios-listado/precios-listado.component';
+import { PreciosAgregarComponent } from './precios-agregar/precios-agregar.component';
 
 
 
@@ -37,7 +40,10 @@ import { HotToastModule } from '@ngneat/hot-toast';
     ClientesListadoComponent,
     ClientesAgregarComponent,
     ClientesDashboardComponent,
-    ClientesModalComponent
+    ClientesModalComponent,
+    PreciosDashboardComponent,
+    PreciosListadoComponent,
+    PreciosAgregarComponent
   ],
   imports: [
     BrowserModule,

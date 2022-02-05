@@ -9,6 +9,8 @@ import {
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ClientesService} from "../services/clientes.service";
 import {ActivatedRoute} from "@angular/router";
+import {NgxSpinnerService} from "ngx-spinner";
+import {NotificationService} from "../services/notification.service";
 
 @Component({
   selector: 'app-clientes-agregar',
@@ -29,7 +31,12 @@ export class ClientesAgregarComponent implements OnInit {
   esEditar: boolean = false;
   id: string;
 
-  constructor(private formBuilder: FormBuilder, private _snackBar: MatSnackBar, private clienteService: ClientesService, private activeRoute: ActivatedRoute,) {
+  constructor(private formBuilder: FormBuilder,
+              private _snackBar: MatSnackBar,
+              private clienteService: ClientesService,
+              private activeRoute: ActivatedRoute,
+              private spinner: NgxSpinnerService,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -74,34 +81,29 @@ export class ClientesAgregarComponent implements OnInit {
 
   onSubmit(): void {
     if (this.form.valid) {
-      this.clienteService.create(this.form.value).then(r => {
-        console.log(r);
+      this.spinner.show();
+      this.clienteService.create(this.form.value).then(() => {
         //reset form
         this.formGroupDirective.resetForm();
+        this.spinner.hide();
         //notificacion
-        this.openSnackBar('Cliente Guardado!')
+        this.notificationService.exitoToast('Cliente Guardado!')
       })
     }
   }
 
   onEdit(): void {
     if (this.form.valid) {
+      this.spinner.show();
       this.clienteService.update(this.id, this.form.value).then(() => {
-          console.log('actualizado')
-        this.openSnackBar('Cliente Actualizado!')
+        this.spinner.hide();
+        this.notificationService.exitoToast('Cliente Actualizado!')
         })
     } else {
       console.log('form invalido')
     }
   }
 
-  openSnackBar(mensaje: string) {
-    this._snackBar.open(mensaje, '', {
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-      duration: 2000,
-    });
-  }
 
 
 }

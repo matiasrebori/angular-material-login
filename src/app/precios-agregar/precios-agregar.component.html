@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col">
+      <mat-card class="mat-elevation-z8">
+        <h1 *ngIf="!esEditar">Agregar Precio</h1>
+        <h1 *ngIf="esEditar">Editar Precio</h1>
+        <form [formGroup]="form">
+          <!--Nombre-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Nombre</mat-label>
+            <input matInput type="text" formControlName="nombre">
+            <mat-error *ngIf="form.controls['nombre'].hasError('required')">
+              Nombre es requerido
+            </mat-error>
+          </mat-form-field>
+          <!--Duracion-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Duracion</mat-label>
+            <input matInput type="number" formControlName="duracion">
+            <mat-error *ngIf="form.controls['duracion'].hasError('required')">
+              Duracion es requerido
+            </mat-error>
+          </mat-form-field>
+          <!--tipoDuracion-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Tipo de Duracion</mat-label>
+            <input matInput type="number" formControlName="tipoDuracion">
+            <mat-error *ngIf="form.controls['tipoDuracion'].hasError('required')">
+              Tipo de Duracion es requerido
+            </mat-error>
+          </mat-form-field>
+          <!--Costo-->
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Costo</mat-label>
+            <input matInput type="number" formControlName="costo">
+            <mat-error *ngIf="form.controls['costo'].hasError('required')">
+              Costo es requerido
+            </mat-error>
+          </mat-form-field>
+          <button *ngIf="!esEditar" (click)="onSubmit()" mat-raised-button color="primary" type="submit" class="example-full-width">Guardar</button>
+          <button *ngIf="esEditar" (click)="onEdit()" mat-raised-button color="primary" type="submit" class="example-full-width">Editar</button>
+        </form>
+        <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#ff4081" type = "ball-beat" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+      </mat-card>
+    </div>
+  </div>
+</div>

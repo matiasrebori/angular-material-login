@@ -29,7 +29,7 @@ export class ClientesModalComponent implements OnInit {
   confirmarEliminar(){
     this.notification.confirmDelete().subscribe((success) => {
       if(success){
-        this.clienteService.delete('dasdasdasda').then(()=>{
+        this.clienteService.delete(this.data.id).then(()=>{
           this.dialogRef.close();
           this.notification.exitoToast('Cliente Eliminado!');
         })
