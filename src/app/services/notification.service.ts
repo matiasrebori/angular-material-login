@@ -60,4 +60,10 @@ export class NotificationService {
       duration: 3000,
     });
   }
+
+  errorToast(message: string) {
+    this.toast.error(message, {
+      duration: 3000,
+    });
+  }
 }

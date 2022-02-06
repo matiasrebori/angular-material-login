@@ -1,7 +1,7 @@
-import { DocumentReference } from '@angular/fire/firestore';
+import {DocumentReference} from "@angular/fire/compat/firestore";
 
-export class Cliente{
-  id:string;
+export class Cliente {
+  id: string;
   nombre: string;
   apellido: string;
   correo: string;
@@ -10,22 +10,34 @@ export class Cliente{
   cedula: string;
   // ref: DocumentReference;
   visible: boolean;
-  constructor()
-  {
+
+  constructor() {
   }
 }
 
-export class Precios{
+export class Precios {
   id: string;
   duracion: number;
   nombre: string;
   tipoDuracion: number;
   costo: number;
+
   // ref: DocumentReference;
-  constructor()
-  {
-
+  constructor() {
   }
-
 }
+
+export class Inscripcion {
+  id: string;
+  fechaInicial: Date;
+  fechaFinal: Date;
+  cliente: DocumentReference;
+  precio: DocumentReference;
+  total: number;
+
+  constructor() {
+  }
+}
+
+
 

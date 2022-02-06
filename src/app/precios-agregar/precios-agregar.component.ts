@@ -15,7 +15,7 @@ export class PreciosAgregarComponent implements OnInit {
   // que comienze con 1-9 y dps cualquier numero
   numberRegEx = /^[1-9]\d*$/;
   // letra, numero, espacio
-  stringRegEx = /^[a-zA-Z0-9\s]+$/;
+  stringRegEx = /^[a-zA-Z0-9\sñ]+$/;
 
   @Input() precioId: string;
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
@@ -67,7 +67,7 @@ export class PreciosAgregarComponent implements OnInit {
         this.formGroupDirective.resetForm();
         this.spinner.hide();
         //notificacion
-        this.notificationService.exitoToast('Cliente Guardado!')
+        this.notificationService.exitoToast('Cliente Guardado!');
       })
     }
   }

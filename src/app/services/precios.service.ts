@@ -14,21 +14,21 @@ import {map} from "rxjs/operators";
 })
 export class PreciosService {
   private dbPath = 'precios';
-  clientesCollection: AngularFirestoreCollection<Precios>;
+  preciosCollection: AngularFirestoreCollection<Precios>;
   private itemDoc: AngularFirestoreDocument<Precios>;
   item: Observable<Precios>;
 
   constructor(private afs: AngularFirestore) {
-    this.clientesCollection = afs.collection<Precios>(this.dbPath);
+    this.preciosCollection = afs.collection<Precios>(this.dbPath);
   }
 
   //traer los datos sin metadata, id
   getAllNaive(): Observable<Precios[]> {
-    return this.clientesCollection.valueChanges();
+    return this.preciosCollection.valueChanges();
   }
 
   getAll(): Observable<Precios[]> {
-    return this.clientesCollection.snapshotChanges().pipe(
+    return this.preciosCollection.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Precios;
         data.id = a.payload.doc.id;
@@ -42,15 +42,19 @@ export class PreciosService {
     return this.itemDoc.valueChanges();
   }
 
+  getRef(id:string): DocumentReference{
+    return this.afs.doc<Precios>(`${this.dbPath}/${id}`).ref;
+  }
+
   create(precio: Precios): Promise<DocumentReference<Precios>> {
-    return this.clientesCollection.add(precio);
+    return this.preciosCollection.add(precio);
   }
 
   update(id: string, data: Precios): Promise<void>{
-    return this.clientesCollection.doc(id).update(data);
+    return this.preciosCollection.doc(id).update(data);
   }
 
   delete(id: string): Promise<void> {
-    return this.clientesCollection.doc(id).delete();
+    return this.preciosCollection.doc(id).delete();
   }
 }
