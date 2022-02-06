@@ -28,6 +28,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { PreciosDashboardComponent } from './precios-dashboard/precios-dashboard.component';
 import { PreciosListadoComponent } from './precios-listado/precios-listado.component';
 import { PreciosAgregarComponent } from './precios-agregar/precios-agregar.component';
+import { PreciosModalComponent } from './precios-modal/precios-modal.component';
+import { InscripcionesAgregarComponent } from './inscripciones-agregar/inscripciones-agregar.component';
 
 
 
@@ -43,7 +45,9 @@ import { PreciosAgregarComponent } from './precios-agregar/precios-agregar.compo
     ClientesModalComponent,
     PreciosDashboardComponent,
     PreciosListadoComponent,
-    PreciosAgregarComponent
+    PreciosAgregarComponent,
+    PreciosModalComponent,
+    InscripcionesAgregarComponent
   ],
   imports: [
     BrowserModule,

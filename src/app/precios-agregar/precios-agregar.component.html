@@ -12,29 +12,41 @@
             <mat-error *ngIf="form.controls['nombre'].hasError('required')">
               Nombre es requerido
             </mat-error>
+            <mat-error *ngIf="form.controls['nombre'].hasError('pattern')">
+              Solo caracteres alfanumericos
+            </mat-error>
           </mat-form-field>
           <!--Duracion-->
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Duracion</mat-label>
-            <input matInput type="number" formControlName="duracion">
+            <input matInput type="text" formControlName="duracion">
             <mat-error *ngIf="form.controls['duracion'].hasError('required')">
               Duracion es requerido
+            </mat-error>
+            <mat-error *ngIf="form.controls['duracion'].hasError('pattern')">
+              Ingrese un numero valido
             </mat-error>
           </mat-form-field>
           <!--tipoDuracion-->
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Tipo de Duracion</mat-label>
-            <input matInput type="number" formControlName="tipoDuracion">
+            <input matInput type="text" formControlName="tipoDuracion">
             <mat-error *ngIf="form.controls['tipoDuracion'].hasError('required')">
               Tipo de Duracion es requerido
+            </mat-error>
+            <mat-error *ngIf="form.controls['tipoDuracion'].hasError('pattern')">
+              Ingrese un numero valido
             </mat-error>
           </mat-form-field>
           <!--Costo-->
           <mat-form-field class="example-full-width" appearance="fill">
             <mat-label>Costo</mat-label>
-            <input matInput type="number" formControlName="costo">
+            <input matInput type="text" formControlName="costo">
             <mat-error *ngIf="form.controls['costo'].hasError('required')">
               Costo es requerido
+            </mat-error>
+            <mat-error *ngIf="form.controls['costo'].hasError('pattern')">
+              Ingrese un numero valido
             </mat-error>
           </mat-form-field>
           <button *ngIf="!esEditar" (click)="onSubmit()" mat-raised-button color="primary" type="submit" class="example-full-width">Guardar</button>

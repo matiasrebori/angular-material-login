@@ -1,0 +1,54 @@
+<app-menu></app-menu>
+<div class="container">
+  <section *ngIf="clienteId==''">
+    <div class="row text-center mt-3">
+      <h1>Seleccionar Cliente</h1>
+    </div>
+    <div class="row text-center mt-3">
+      <app-clientes-listado (enviarclienteID)="fun($event)"></app-clientes-listado>
+    </div>
+  </section>
+  <section *ngIf="clienteId">
+    <div class="row text-center mt-3">
+      <h1>Registrar Inscripcion</h1>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-6 mx-auto">
+        <mat-card class="mat-elevation-z8">
+          <form>
+            <!--Cliente-->
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Cliente</mat-label>
+              <input matInput readonly [value]="clienteNombre">
+            </mat-form-field>
+            <!--Precio-->
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Precio</mat-label>
+              <mat-select [(value)]="precioId" (selectionChange)="seleccionarPrecio($event.value)">
+                <mat-option [value]="precio.id" *ngFor="let precio of precios">{{ precio.nombre }}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <!--Fecha Inicio-->
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Fecha de Inicio</mat-label>
+              <input matInput [matDatepicker]="picker" [formControl]="fechaInicial">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <!--Fecha Final-->
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Fecha de Finalizacion</mat-label>
+              <input matInput readonly>
+            </mat-form-field>
+            <!--Totall-->
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Total</mat-label>
+              <input matInput readonly [value]="total | number">
+            </mat-form-field>
+            <button (click)="onSubmit()" mat-raised-button color="primary" type="submit" class="example-full-width">Guardar</button>
+          </form>
+        </mat-card>
+      </div>
+    </div>
+  </section>
+</div>

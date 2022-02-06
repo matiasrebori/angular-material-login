@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
 import {PreciosService} from "../services/precios.service";
 import {NgxSpinnerService} from "ngx-spinner";
@@ -12,26 +12,51 @@ import {NotificationService} from "../services/notification.service";
 export class PreciosAgregarComponent implements OnInit {
   form: FormGroup;
   esEditar: boolean = false;
+  // que comienze con 1-9 y dps cualquier numero
+  numberRegEx = /^[1-9]\d*$/;
+  // letra, numero, espacio
+  stringRegEx = /^[a-zA-Z0-9\s]+$/;
+
+  @Input() precioId: string;
   @ViewChild(FormGroupDirective) formGroupDirective: FormGroupDirective;
+
   constructor(private formBuilder: FormBuilder,
               private preciosService: PreciosService,
               private spinner: NgxSpinnerService,
               private notificationService: NotificationService
-              ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.iniciarForm()
   }
 
-  iniciarForm(){
+  iniciarForm() {
     this.form = this.formBuilder.group(
       {
-        nombre: ['', Validators.required],
-        duracion: ['', Validators.required],
-        tipoDuracion: ['', Validators.required],
-        costo: ['', Validators.required],
+        nombre: ['', [Validators.required, Validators.pattern(this.stringRegEx)]],
+        duracion: ['', [Validators.required, Validators.pattern(this.numberRegEx)]],
+        tipoDuracion: ['', [Validators.required, Validators.pattern(this.numberRegEx)]],
+        costo: ['', [Validators.required, Validators.pattern(this.numberRegEx)]],
       },
     );
+  }
+
+  //es editar
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes['precioId'].firstChange) {
+      this.esEditar = true;
+      //traer el cliente y poner datos en form
+      this.preciosService.get(this.precioId).subscribe((precio) => {
+        this.form.setValue(
+          {
+            nombre: precio.nombre,
+            duracion: precio.duracion,
+            tipoDuracion: precio.tipoDuracion,
+            costo: precio.costo,
+          })
+      });
+    }
   }
 
   onSubmit(): void {
@@ -47,8 +72,16 @@ export class PreciosAgregarComponent implements OnInit {
     }
   }
 
-  onEdit(){
-
+  onEdit() {
+    if (this.form.valid) {
+      this.spinner.show();
+      this.preciosService.update(this.precioId, this.form.value).then(() => {
+        this.spinner.hide();
+        this.notificationService.exitoToast('Cliente Actualizado!')
+      })
+    } else {
+      console.log('form invalido')
+    }
   }
 
 }
