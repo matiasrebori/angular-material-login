@@ -39,5 +39,15 @@ export class Inscripcion {
   }
 }
 
+export class InscripcionDetalle {
+  id?:string;
+  clienteNombre:string;
+  clienteApellido:string;
+  fechaInicial: string;
+  fechaFinal: string;
+  tipoDuracion: string;
+  total: number;
+}
+
 
 
