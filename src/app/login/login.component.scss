@@ -63,6 +63,14 @@
   font-size: 1.1rem;
 }
 
+/* Change input Autocomplete styles in Chrome*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus, {
+  -webkit-text-fill-color: #0c1066;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 @media screen and (max-width: 959px) {
   .login-aside {
     display: none;
@@ -70,4 +78,11 @@
   .container-fluid {
     width: 100%;
   }
+  #imagen{
+    display: none !important;
+  }
 }
+
+
+
+

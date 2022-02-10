@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<div *ngIf="autenticado">
+  <div *ngIf="menuParaTelefono">
+    <app-menu-sidenav></app-menu-sidenav>
+  </div>
+  <div *ngIf="!menuParaTelefono">
+    <app-menu></app-menu>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+<div *ngIf="!autenticado">
+  <app-login></app-login>
+</div>
+

@@ -47,6 +47,9 @@ export class InscripcionDetalle {
   fechaFinal: string;
   tipoDuracion: string;
   total: number;
+
+  constructor() {
+  }
 }
 
 

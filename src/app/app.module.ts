@@ -30,6 +30,7 @@ import { PreciosListadoComponent } from './precios-listado/precios-listado.compo
 import { PreciosAgregarComponent } from './precios-agregar/precios-agregar.component';
 import { PreciosModalComponent } from './precios-modal/precios-modal.component';
 import { InscripcionesAgregarComponent } from './inscripciones-agregar/inscripciones-agregar.component';
+import { MenuSidenavComponent } from './menu-sidenav/menu-sidenav.component';
 
 
 
@@ -47,7 +48,8 @@ import { InscripcionesAgregarComponent } from './inscripciones-agregar/inscripci
     PreciosListadoComponent,
     PreciosAgregarComponent,
     PreciosModalComponent,
-    InscripcionesAgregarComponent
+    InscripcionesAgregarComponent,
+    MenuSidenavComponent
   ],
   imports: [
     BrowserModule,

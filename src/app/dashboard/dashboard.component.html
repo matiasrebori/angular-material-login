@@ -1,10 +1,57 @@
-<app-menu></app-menu>
-<button mat-flat-button (click)="getInscripcionesDetalle()">Tocar</button>
 <div class="container">
-  <div class="row">
-    <ul class="list-group">
-      <li *ngFor="let inscripcion of inscripciones" class="list-group-item">{{inscripcion.clienteNombre}}, {{inscripcion.clienteApellido}}, {{inscripcion.tipoDuracion}}, {{inscripcion.total}}</li>
-    </ul>
+  <div class="row text-center mt-3">
+    <button mat-flat-button >Tocar</button>
+    <h1>Listado de Inscripciones</h1>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <mat-card class="mat-elevation-z8">
+        <mat-card-content>
+          <div class="row align-items-center">
+            <div class="col-11">
+              <mat-form-field appearance="standard">
+                <mat-label>Filtrar</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
+              </mat-form-field>
+            </div>
+            <div class="col-1 text-center">
+              <mat-icon matTooltip="Haz click en una columna para realizar una accion">
+                info
+              </mat-icon>
+            </div>
+          </div>
+
+          <div class="example-container mat-elevation-z2">
+            <div class="example-loading-shade"
+                 *ngIf="isLoadingResults">
+              <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+            </div>
+            <mat-table [dataSource]="dataSource" matSort>
+
+              <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>
+                  {{column.header}}
+                </mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                  {{column.cell(row)}}
+                </mat-cell>
+              </ng-container>
+
+
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row (click)="emitirEvento(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+              <!-- Row shown when there is no matching data. -->
+              <!--            <tr class="mat-row" *matNoDataRow>-->
+              <!--              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>-->
+              <!--            </tr>-->
+            </mat-table>
+
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
 </div>
 
