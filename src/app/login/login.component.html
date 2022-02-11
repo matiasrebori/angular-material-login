@@ -8,30 +8,30 @@
     <main class="login-content"
           fxLayout="column"
           fxLayoutAlign="center center">
-      <span class="login-header mb-5 mt-3">Iniciar Sesion</span>
+      <span class="login-header mb-5 mt-3">{{'login.title' | translate }}</span>
       <!-- login form -->
       <form [formGroup]="form" class="login-form align-items-center" fxLayout="column" (ngSubmit)="login($event)">
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Email</mat-label>
+          <mat-label>{{'login.email.title' | translate }}</mat-label>
           <input matInput placeholder="Type your email" type="email" formControlName='email'>
           <mat-icon matPrefix>mail_outline</mat-icon>
           <mat-error *ngIf="form.controls['email'].hasError('email') && !form.controls['email'].hasError('required')">
-            Ingresa un email valido
+            {{'login.email.errorEmail' | translate }}
           </mat-error>
           <mat-error *ngIf="form.controls['email'].hasError('required')">
-            El email es <strong>requerido</strong>
+            {{'login.email.errorRequired' | translate }}
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Password</mat-label>
+          <mat-label>{{'login.password.title' | translate }}</mat-label>
           <input matInput placeholder="Type your password" type="password" formControlName='password'>
           <mat-icon matPrefix>lock_outline</mat-icon>
           <mat-error *ngIf="form.controls['password'].hasError('required')">
-            La contraseña es <strong>requerida</strong>
+            {{'login.password.errorRequired' | translate }}
           </mat-error>
         </mat-form-field>
 
-        <button mat-raised-button color="warn" type="submit">Ingresar</button>
+        <button mat-raised-button color="warn" type="submit" id="loginButton" class="">{{'login.loginButton' | translate }}</button>
       </form>
       <!--      <div class="mt-3">-->
       <!--        <a class="forgot-link" routerLink="/forgot-password">forgot password?</a>-->
@@ -57,5 +57,5 @@
   color="#ff4081"
   type="ball-atom"
   [fullScreen]="true">
-  <p style="color: white"> Iniciando Sesion </p>
+  <p style="color: white"> {{'login.loading' | translate }} </p>
 </ngx-spinner>

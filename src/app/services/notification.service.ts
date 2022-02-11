@@ -19,9 +19,9 @@ export class NotificationService {
 
   constructor(private popUp: ConfirmBoxEvokeService, private toast: HotToastService ) { }
 
-  confirmDelete(): Observable<boolean>{
+  confirmDelete(message:string, confirm:string, decline:string): Observable<boolean>{
     return new Observable<boolean>((observer) => {
-      this.popUp.danger('', 'estas seguro de que deseas eliminar?', 'Eliminar', 'Cancelar')
+      this.popUp.danger('', message, confirm, decline)
         .subscribe(resp => {
           if(resp.success){
             observer.next(true);

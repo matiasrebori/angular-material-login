@@ -2,57 +2,59 @@
   <div class="row text-center">
     <div class="col">
       <mat-card class="mat-elevation-z8">
-        <h1 *ngIf="!esEditar">Agregar Precio</h1>
-        <h1 *ngIf="esEditar">Editar Precio</h1>
+        <h1 *ngIf="!esEditar">{{'prices.add.title.isAdd' | translate }}</h1>
+        <h1 *ngIf="esEditar">{{'prices.add.title.isEdit' | translate }}</h1>
         <form [formGroup]="form">
           <!--Nombre-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Nombre</mat-label>
+            <mat-label>{{'prices.add.name.title' | translate }}</mat-label>
             <input matInput type="text" formControlName="nombre">
             <mat-error *ngIf="form.controls['nombre'].hasError('required')">
-              Nombre es requerido
+              {{'prices.add.name.errorRequired' | translate }}
             </mat-error>
             <mat-error *ngIf="form.controls['nombre'].hasError('pattern')">
-              Solo caracteres alfanumericos
+              {{'prices.add.name.errorPattern' | translate }}
             </mat-error>
           </mat-form-field>
           <!--Duracion-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Duracion</mat-label>
+            <mat-label>{{'prices.add.duration.title' | translate }}</mat-label>
             <input matInput type="text" formControlName="duracion">
             <mat-error *ngIf="form.controls['duracion'].hasError('required')">
-              Duracion es requerido
+              {{'prices.add.duration.errorRequired' | translate }}
             </mat-error>
             <mat-error *ngIf="form.controls['duracion'].hasError('pattern')">
-              Ingrese un numero valido
+              {{'prices.add.duration.errorPattern' | translate }}
             </mat-error>
           </mat-form-field>
           <!--tipoDuracion-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Tipo de Duracion</mat-label>
-            <input matInput type="text" formControlName="tipoDuracion">
+            <mat-label>{{'prices.add.durationType.title' | translate }}</mat-label>
+            <mat-select formControlName="tipoDuracion">
+              <mat-option [value]="option.value" *ngFor="let option of opcionesTipoDuracion">{{ option.title }}</mat-option>
+            </mat-select>
             <mat-error *ngIf="form.controls['tipoDuracion'].hasError('required')">
-              Tipo de Duracion es requerido
-            </mat-error>
-            <mat-error *ngIf="form.controls['tipoDuracion'].hasError('pattern')">
-              Ingrese un numero valido
+              {{'prices.add.durationType.errorRequired' | translate }}
             </mat-error>
           </mat-form-field>
           <!--Costo-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Costo</mat-label>
+            <mat-label>{{'prices.add.cost.title' | translate }}</mat-label>
             <input matInput type="text" formControlName="costo">
             <mat-error *ngIf="form.controls['costo'].hasError('required')">
-              Costo es requerido
+              {{'prices.add.cost.errorRequired' | translate }}
             </mat-error>
             <mat-error *ngIf="form.controls['costo'].hasError('pattern')">
-              Ingrese un numero valido
+              {{'prices.add.cost.errorPattern' | translate }}
             </mat-error>
           </mat-form-field>
-          <button *ngIf="!esEditar" (click)="onSubmit()" mat-raised-button color="primary" type="submit" class="example-full-width">Guardar</button>
-          <button *ngIf="esEditar" (click)="onEdit()" mat-raised-button color="primary" type="submit" class="example-full-width">Editar</button>
+          <button *ngIf="!esEditar" (click)="onSubmit()" mat-raised-button color="primary" type="submit"
+                  class="example-full-width">{{'prices.add.button.isAdd' | translate }}</button>
+          <button *ngIf="esEditar" (click)="onEdit()" mat-raised-button color="primary" type="submit"
+                  class="example-full-width">{{'prices.add.button.isEdit' | translate }}</button>
         </form>
-        <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#ff4081" type = "ball-beat" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+        <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#ff4081" type="ball-beat" [fullScreen]="true"><p
+          style="color: white"> {{'prices.add.loading' | translate }} </p></ngx-spinner>
       </mat-card>
     </div>
   </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 
 @Component({
@@ -8,11 +8,13 @@ import {AuthService} from "../services/auth.service";
 })
 export class MenuComponent implements OnInit {
 
-  constructor(private authService:AuthService) { }
+  constructor(private authService: AuthService) {
+  }
 
   ngOnInit(): void {
   }
-  logout(){
+
+  logout() {
     this.authService.logout()
   }
 

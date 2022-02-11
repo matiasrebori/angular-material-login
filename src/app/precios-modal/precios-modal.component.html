@@ -1,16 +1,16 @@
 <div class="container">
-<h1 mat-dialog-title class="text-center">Acciones</h1>
+<h1 mat-dialog-title class="text-center">{{'prices.modal.title' | translate }}</h1>
 <mat-dialog-content>
   <div class="row my-3">
-    <button (click)="emitirEditar()" mat-flat-button color="accent">Editar</button>
+    <button (click)="emitirEditar()" mat-flat-button color="accent">{{'prices.modal.editButton' | translate }}</button>
   </div>
 
   <div class="row my-3">
-    <button (click)="eliminar()" mat-flat-button color="warn">Eliminar</button>
+    <button (click)="eliminar()" mat-flat-button color="warn">{{'prices.modal.deleteButton' | translate }}</button>
   </div>
 
 </mat-dialog-content>
 <div mat-dialog-actions align="center">
-  <button mat-stroked-button mat-dialog-close>Cerrar</button>
+  <button mat-stroked-button mat-dialog-close>{{'prices.modal.close' | translate }}</button>
 </div>
 </div>

@@ -1,8 +1,9 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import {Cliente, Precios} from "../models";
-import {Observable} from "rxjs";
 import {PreciosService} from "../services/precios.service";
+import {TranslateService} from "@ngx-translate/core";
+import {MatSort, MatSortable} from "@angular/material/sort";
 
 @Component({
   selector: 'app-precios-listado',
@@ -33,39 +34,59 @@ export class PreciosListadoComponent implements OnInit {
       cell: (element: Precios) => `${element.costo}`,
     },
   ];
-  dataSource: MatTableDataSource<Precios>;
-  items: Observable<any[]>;
-  preciosListado: Precios[] = new Array<Precios>();
+  dataSource: MatTableDataSource<any>;
+  listado: any[] = [];
   isLoadingResults: boolean;
+  tableHeaders: any;
 
   @Output() enviarprecioID: EventEmitter<string> = new EventEmitter();
+  @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private preciosService: PreciosService) { }
+  constructor(private preciosService: PreciosService, private translate: TranslateService) {
+  }
 
   ngOnInit(): void {
+    /**
+     * Cargar la tabla de precios
+     */
     this.isLoadingResults = true;
-    this.items = this.preciosService.getAll();
-    this.items.subscribe(res => {
-      this.preciosListado = res;
-      this.dataSource = new MatTableDataSource(this.preciosListado);
-      //ocultar spinner
+    //traer precios
+    this.preciosService.getAll().subscribe(res => {
+      this.listado = res;
+      // reemplazar el tipo por texto traducido
+      let tipoDuracion = this.translate.instant('models.durationType')
+      this.listado.map(value => {
+        if (value.tipoDuracion == 1) {
+          value.tipoDuracion = tipoDuracion.day.title
+        } else if (value.tipoDuracion == 2) {
+          value.tipoDuracion = tipoDuracion.week.title
+        } else if (value.tipoDuracion == 3) {
+          value.tipoDuracion = tipoDuracion.month.title
+        } else if (value.tipoDuracion == 4) {
+          value.tipoDuracion = tipoDuracion.year.title
+        }
+      })
+      this.dataSource = new MatTableDataSource(this.listado);
+      //ordenar por precio
+      this.sort.sort({id: 'costo', start: 'asc', disableClear: true} as MatSortable);
+      this.dataSource.sort = this.sort;
       this.isLoadingResults = false;
+    })
+    // headers traducidos para la tabla
+    let tableHeaders = this.translate.instant('prices.table')
+    tableHeaders = Object.values(tableHeaders)
+    let contador: number = 0
+    this.columns.map(column => {
+      column.header = tableHeaders[contador]
+      contador++
     })
   }
 
   emitirEvento(row: Cliente) {
+    /**
+     * enviar id a componenete padre PreciosDashboard
+     */
     this.enviarprecioID.emit(row.id)
   }
 
 }
-
-
-const ELEMENT_DATA: Precios[] = [
-  {
-    id: '1',
-    nombre: 'por Dia',
-    duracion: 1,
-    tipoDuracion: 1,
-    costo: 12000,
-  },
-];

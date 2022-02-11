@@ -1,11 +1,11 @@
 <mat-toolbar color="primary">
-  <button mat-flat-button color="primary" routerLink="/dashboard">Dashboard</button>
-  <button mat-flat-button color="primary" routerLink="/inscripciones">Inscripciones</button>
-  <button mat-flat-button color="primary" routerLink="/clientes-dashboard">Clientes</button>
-  <button mat-flat-button color="primary" routerLink="/precios-dashboard">Precios</button>
+  <a mat-flat-button color="primary" routerLink="/dashboard">{{'menu.dashboard' | translate }}</a>
+  <a mat-flat-button color="primary" routerLink="/inscripciones">{{'menu.enrollment' | translate }}</a>
+  <a mat-flat-button color="primary" routerLink="/clientes-dashboard">{{'menu.clients' | translate }}</a>
+  <a mat-flat-button color="primary" routerLink="/precios-dashboard">{{'menu.prices' | translate }}</a>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
+  <a mat-mini-fab class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
     <mat-icon>logout</mat-icon>
-  </button>
+  </a>
 </mat-toolbar>
 

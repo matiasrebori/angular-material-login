@@ -1,6 +1,8 @@
 /* tabla "responsive" */
 .example-container {
   overflow: auto;
+  min-height: 200px;
+  position: relative;
 }
 
 .example-loading-shade {
@@ -24,4 +26,8 @@
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
   cursor: pointer;
+}
+
+#noDataRow{
+  width: 100%;
 }

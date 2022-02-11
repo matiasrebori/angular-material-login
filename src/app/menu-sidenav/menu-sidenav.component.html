@@ -1,18 +1,24 @@
 <div class="example-container">
   <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name">MasterGym</h1>
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <!--    <h1 class="example-app-name">MasterGym</h1>-->
   </mat-toolbar>
 
   <mat-sidenav-container class="example-sidenav-container">
-    <mat-sidenav #snav mode="over">
+    <mat-sidenav #snav mode="over" autoFocus="false">
       <mat-nav-list>
-        <a mat-list-item routerLink="/dashboard" (click)="snav.toggle()">Dashboard</a>
-        <a mat-list-item routerLink="/inscripciones" (click)="snav.toggle()">Inscripciones</a>
-        <a mat-list-item routerLink="/clientes-dashboard" (click)="snav.toggle()">Clientes</a>
-        <a mat-list-item routerLink="/precios-dashboard" (click)="snav.toggle()">Precios</a>
+        <a mat-list-item routerLink="/dashboard" (click)="snav.toggle()"
+           routerLinkActive="active-item">{{'menu.dashboard' | translate }}</a>
+        <a mat-list-item routerLink="/inscripciones" (click)="snav.toggle()"
+           routerLinkActive="active-item">{{'menu.enrollment' | translate }}</a>
+        <a mat-list-item routerLink="/clientes-dashboard" (click)="snav.toggle()"
+           routerLinkActive="active-item">{{'menu.clients' | translate }}</a>
+        <a mat-list-item routerLink="/precios-dashboard" (click)="snav.toggle()"
+           routerLinkActive="active-item">{{'menu.prices' | translate }}</a>
         <mat-divider></mat-divider>
-        <a mat-list-item routerLink="/precios-dashboard" (click)="logout()">Cerrar Sesion</a>
+        <a mat-list-item routerLink="/precios-dashboard" (click)="logout()">{{'menu.logout' | translate }}</a>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

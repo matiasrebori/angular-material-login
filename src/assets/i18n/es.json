@@ -1,0 +1,104 @@
+{
+  "login": {
+    "title": "Iniciar Sesion",
+    "email": {
+      "title": "Correo",
+      "errorEmail": "Ingresa un email valido",
+      "errorRequired": "El email es requerido"
+    },
+    "password": {
+      "title": "Contraseña",
+      "errorRequired": "La contraseña es requerida"
+    },
+    "loginButton": "Ingresar",
+    "loading": "Iniciando Sesion..."
+  },
+  "prices": {
+    "list": {
+      "title": "Listado de precios"
+    },
+    "table": {
+      "name": "Nombre",
+      "duration": "Duracion",
+      "durationType": "Tipo de Duracion",
+      "cost": "Costo"
+    },
+    "add": {
+      "title": {
+        "isAdd": "Agregar Precio",
+        "isEdit": "Editar Precio"
+      },
+      "name": {
+        "title": "Nombre",
+        "errorRequired": "El nombre es requerido",
+        "errorPattern": "Solo caracteres alfanumericos"
+      },
+      "duration": {
+        "title": "Duracion",
+        "errorRequired": "La duracion es requerida",
+        "errorPattern": "Ingrese un numero valido"
+      },
+      "durationType": {
+        "title": "Tipo de Duracion",
+        "errorRequired": "El tipo de duracion es requerido"
+      },
+      "cost": {
+        "title": "Costo",
+        "errorRequired": "El costo es requerido",
+        "errorPattern": "Ingrese un numero valido"
+      },
+      "button": {
+        "isAdd": "Guardar",
+        "isEdit": "Editar"
+      },
+      "loading": "Cargando...",
+      "addNotifications": {
+        "success": "Precio Guardado!",
+        "error": "Error al guardar"
+      },
+      "editNotifications": {
+        "success": "Precio Actualizado!",
+        "error": "Error al guardar"
+      }
+    },
+    "modal": {
+      "title": "Acciones",
+      "editButton": "Editar",
+      "deleteButton": "Eliminar",
+      "close": "Cerrar",
+      "deleteNotification": {
+        "message": "estas seguro de que deseas eliminar?",
+        "confirm": "Eliminar",
+        "decline": "Cancelar"
+      },
+      "deleteSuccess": "Precio Eliminado!"
+    }
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "enrollment": "Inscripciones",
+    "clients": "Clientes",
+    "prices": "Precios",
+    "logout":"Cerrar Sesion"
+  },
+  "models": {
+    "durationType": {
+      "day":{
+        "title": "dia",
+        "value": 1
+      } ,
+      "week": {
+        "title": "semana",
+        "value": 2
+      },
+      "month": {
+        "title": "mes",
+        "value": 3
+      },
+      "year": {
+        "title": "año",
+        "value": 4
+      }
+    }
+  }
+}

@@ -64,6 +64,9 @@ export class ClientesAgregarComponent implements OnInit {
   }
 
   editar(){
+    /**
+     * cambiar html con variable esEditar, y setear el form para editar
+     */
     this.esEditar = true;
     //traer el cliente y poner datos en form
     this.clienteService.get(this.id).subscribe((cliente) => {
@@ -80,6 +83,9 @@ export class ClientesAgregarComponent implements OnInit {
   }
 
   onSubmit(): void {
+    /**
+     * Guardar datos
+     */
     if (this.form.valid) {
       this.spinner.show();
       this.clienteService.create(this.form.value).then(() => {
@@ -87,20 +93,25 @@ export class ClientesAgregarComponent implements OnInit {
         this.formGroupDirective.resetForm();
         this.spinner.hide();
         //notificacion
-        this.notificationService.exitoToast('Cliente Guardado!')
+        this.notificationService.exitoToast('Cliente Guardado!');
       })
+    }else {
+      console.log('guardar form invalido')
     }
   }
 
   onEdit(): void {
+    /**
+     * Editar datos
+     */
     if (this.form.valid) {
       this.spinner.show();
       this.clienteService.update(this.id, this.form.value).then(() => {
         this.spinner.hide();
-        this.notificationService.exitoToast('Cliente Actualizado!')
+        this.notificationService.exitoToast('Cliente Actualizado!');
         })
     } else {
-      console.log('form invalido')
+      console.log('editar form invalido')
     }
   }
 

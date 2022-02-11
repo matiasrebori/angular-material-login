@@ -1,41 +1,35 @@
 <div class="container">
   <div class="row text-center">
     <div class="col">
-      <h1>Listado de Precios</h1>
+      <h1>{{'prices.list.title' | translate }}</h1>
     </div>
   </div>
 
   <div class="row">
     <div class="col">
+      <div class="example-container mat-elevation-z8">
+        <!--spinner-->
+        <div class="example-loading-shade"
+             *ngIf="isLoadingResults">
+          <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+        </div>
+        <!--table-->
+        <mat-table [dataSource]="dataSource" matSort>
 
-          <div class="example-container mat-elevation-z8">
-            <div class="example-loading-shade"
-                 *ngIf="isLoadingResults">
-              <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
-            </div>
-            <mat-table [dataSource]="dataSource">
+          <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+            <mat-header-cell *matHeaderCellDef>
+              {{column.header}}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              {{column.cell(row)}}
+            </mat-cell>
+          </ng-container>
 
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row (click)="emitirEvento(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
-              <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-                <mat-header-cell *matHeaderCellDef>
-                  {{column.header}}
-                </mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                  {{column.cell(row)}}
-                </mat-cell>
-              </ng-container>
-
-              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row (click)="emitirEvento(row)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-              Row shown when there is no matching data.
-              <tr class="mat-row" *matNoDataRow>
-                <td class="mat-cell" colspan="4">No hay datos</td>
-              </tr>
-            </mat-table>
-
-          </div>
-
+        </mat-table>
+      </div>
     </div>
   </div>
 </div>

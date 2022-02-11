@@ -8,10 +8,13 @@ import {AuthService} from "../services/auth.service";
 })
 export class MenuSidenavComponent implements OnInit {
 
-  constructor( private authService:AuthService) {}
+  constructor(private authService: AuthService) {
+  }
+
   ngOnInit() {
   }
-  logout(){
+
+  logout() {
     this.authService.logout()
   }
 
