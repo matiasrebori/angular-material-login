@@ -50,6 +50,7 @@ export class PreciosListadoComponent implements OnInit {
      * Cargar la tabla de precios
      */
     this.isLoadingResults = true;
+    this.traducirHeadersTabla();
     //traer precios
     this.preciosService.getAll().subscribe(res => {
       this.listado = res;
@@ -72,13 +73,24 @@ export class PreciosListadoComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.isLoadingResults = false;
     })
-    // headers traducidos para la tabla
-    let tableHeaders = this.translate.instant('prices.table')
-    tableHeaders = Object.values(tableHeaders)
-    let contador: number = 0
-    this.columns.map(column => {
-      column.header = tableHeaders[contador]
-      contador++
+
+  }
+
+  traducirHeadersTabla(){
+    /**
+     * traducir los headers de la tabla segun el idioma
+     */
+    let headers = this.translate.instant('prices.table')
+    this.columns.map(value => {
+      if(value.columnDef == 'nombre'){
+        value.header = headers.name
+      } else if(value.columnDef == 'duracion'){
+        value.header = headers.duration
+      }else if(value.columnDef == 'tipoDuracion'){
+        value.header = headers.durationType
+      }else if(value.columnDef == 'costo'){
+        value.header = headers.cost
+      }
     })
   }
 

@@ -17,7 +17,13 @@
            routerLinkActive="active-item">{{'menu.clients' | translate }}</a>
         <a mat-list-item routerLink="/precios-dashboard" (click)="snav.toggle()"
            routerLinkActive="active-item">{{'menu.prices' | translate }}</a>
-        <mat-divider></mat-divider>
+        <mat-divider style="margin-top: 5px;margin-bottom: 5px"></mat-divider>
+        <a mat-list-item [matMenuTriggerFor]="menu">{{'menu.changeLanguage' | translate }}</a>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="snav.toggle();setLanguageSpanish()">Spanish</button>
+          <button mat-menu-item (click)="snav.toggle();setLanguageEnglish()">English</button>
+          <button mat-menu-item (click)="snav.toggle();setLanguagePortuguese()">Portuguese</button>
+        </mat-menu>
         <a mat-list-item routerLink="/precios-dashboard" (click)="logout()">{{'menu.logout' | translate }}</a>
       </mat-nav-list>
     </mat-sidenav>

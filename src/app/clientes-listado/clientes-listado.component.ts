@@ -5,6 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {Cliente} from "../models";
 import {Observable} from 'rxjs';
 import {ClientesService} from "../services/clientes.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-clientes-listado',
@@ -12,7 +13,8 @@ import {ClientesService} from "../services/clientes.service";
   styleUrls: ['./clientes-listado.component.css']
 })
 export class ClientesListadoComponent implements OnInit {
-  displayedColumns: string[] = ['nombre', 'apellido', 'correo', 'fechaNacimiento', 'telefono', 'cedula'];
+  // displayedColumns: string[] = ['nombre', 'apellido', 'correo', 'fechaNacimiento', 'telefono', 'cedula'];
+  displayedColumns: string[] = ['nombre', 'apellido', 'telefono', 'cedula'];
   columns = [
     {
       columnDef: 'nombre',
@@ -59,17 +61,19 @@ export class ClientesListadoComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private clientesService: ClientesService,) {
+  constructor(private clientesService: ClientesService, private translate: TranslateService) {
   }
 
   ngOnInit(): void {
     //mostrar spinner
     this.isLoadingResults = true;
-
+    this.traducirHeadersTabla();
     this.items = this.clientesService.getAll();
     this.items.subscribe(res => {
       res.map((value) => {
-        value.fechaNacimiento = value.fechaNacimiento.toDate().toLocaleDateString("es-MX");
+        if (value.fechaNacimiento) {
+          value.fechaNacimiento = value.fechaNacimiento.toDate().toLocaleDateString("es-MX");
+        }
       });
       this.clientesListado = res;
       this.dataSource = new MatTableDataSource(this.clientesListado);
@@ -78,11 +82,34 @@ export class ClientesListadoComponent implements OnInit {
       //ocultar spinner
       this.isLoadingResults = false;
     })
-
   }
 
-  //filtro de tabla
+  traducirHeadersTabla() {
+    /**
+     * traducir los headers de la tabla segun el idioma
+     */
+    let headers = this.translate.instant('clients.list.table')
+    this.columns.map(value => {
+      if (value.columnDef == 'nombre') {
+        value.header = headers.firstName
+      } else if (value.columnDef == 'apellido') {
+        value.header = headers.lastName
+      } else if (value.columnDef == 'correo') {
+        value.header = headers.email
+      } else if (value.columnDef == 'fechaNacimiento') {
+        value.header = headers.birthday
+      } else if (value.columnDef == 'telefono') {
+        value.header = headers.phoneNumber
+      } else if (value.columnDef == 'cedula') {
+        value.header = headers.identityNumber
+      }
+    })
+  }
+
   applyFilter(event: Event) {
+    /**
+     * filtro de la tabla
+     */
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -91,24 +118,13 @@ export class ClientesListadoComponent implements OnInit {
     }
   }
 
-  //enviar a editar
   emitirEvento(row: Cliente) {
+    /**
+     * emitir el id al componente ClientesDashboard
+     */
     this.enviarclienteID.emit(row.id)
   }
 
 }
-
-const ELEMENT_DATA: Cliente[] = [
-  {
-    id: '1',
-    nombre: 'Miguel Angel ',
-    apellido: 'Rodriguez Armoa',
-    correo: 'marmoa@gmail.com',
-    fechaNacimiento: new Date(''),
-    telefono: '0981425154',
-    cedula: '5456874',
-    visible: true
-  },
-];
 
 

@@ -2,5 +2,28 @@
   "login": {
     "title": "Log In",
     "loginButton": "Enter"
-  }
+  },
+  "prices": {
+    "modal": {
+      "title": "Actions",
+      "editButton": "Edit",
+      "deleteButton": "Delete",
+      "close": "Close",
+      "deleteNotification": {
+        "message": "are you sure?",
+        "confirm": "Delete",
+        "decline": "Cancel"
+      },
+      "deleteSuccess": "Price Deleted!"
+    }
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "enrollment": "Enrollments",
+    "clients": "Clients",
+    "prices": "Prices",
+    "logout":"Log Out",
+    "changeLanguage": "Change language"
+  },
+  "changeLanguage": "Language changed to English"
 }

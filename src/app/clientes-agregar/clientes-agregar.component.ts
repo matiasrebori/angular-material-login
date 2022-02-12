@@ -6,11 +6,11 @@ import {
   FormControl,
   FormGroupDirective
 } from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {ClientesService} from "../services/clientes.service";
 import {ActivatedRoute} from "@angular/router";
 import {NgxSpinnerService} from "ngx-spinner";
 import {NotificationService} from "../services/notification.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-clientes-agregar',
@@ -28,15 +28,18 @@ export class ClientesAgregarComponent implements OnInit {
     telefono: new FormControl(''),
     cedula: new FormControl(''),
   });
+  //si es true se edita
   esEditar: boolean = false;
+  //id del cliente a editar
   id: string;
 
   constructor(private formBuilder: FormBuilder,
-              private _snackBar: MatSnackBar,
               private clienteService: ClientesService,
               private activeRoute: ActivatedRoute,
               private spinner: NgxSpinnerService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private translate: TranslateService
+  ) {
   }
 
   ngOnInit(): void {
@@ -50,20 +53,23 @@ export class ClientesAgregarComponent implements OnInit {
 
   }
 
-  iniciarForm(){
+  iniciarForm() {
+    let phoneRegEx = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
+    //digit, period or hyphen
+    let identityRegEx = /[\d.-]+/;
     this.form = this.formBuilder.group(
       {
         nombre: ['', Validators.required],
         apellido: ['', Validators.required],
-        correo: ['', [Validators.required, Validators.email]],
-        fechaNacimiento: ['', Validators.required],
-        telefono: ['', Validators.required],
-        cedula: ['', Validators.required],
+        correo: ['', Validators.email],
+        fechaNacimiento: [''],
+        telefono: ['', Validators.pattern(phoneRegEx)],
+        cedula: ['', Validators.pattern(identityRegEx)],
       },
     );
   }
 
-  editar(){
+  editar() {
     /**
      * cambiar html con variable esEditar, y setear el form para editar
      */
@@ -93,9 +99,13 @@ export class ClientesAgregarComponent implements OnInit {
         this.formGroupDirective.resetForm();
         this.spinner.hide();
         //notificacion
-        this.notificationService.exitoToast('Cliente Guardado!');
+        this.notificationService.exitoToast(this.translate.instant('clients.add.addNotifications.success'));
+      }).catch(error => {
+        console.log(error)
+        this.spinner.hide();
+        this.notificationService.errorToast(this.translate.instant('clients.add.addNotifications.error'));
       })
-    }else {
+    } else {
       console.log('guardar form invalido')
     }
   }
@@ -108,13 +118,14 @@ export class ClientesAgregarComponent implements OnInit {
       this.spinner.show();
       this.clienteService.update(this.id, this.form.value).then(() => {
         this.spinner.hide();
-        this.notificationService.exitoToast('Cliente Actualizado!');
-        })
+        this.notificationService.exitoToast(this.translate.instant('clients.add.editNotifications.success'));
+      }).catch(error => {
+        console.log(error)
+        this.spinner.hide();
+        this.notificationService.errorToast(this.translate.instant('clients.add.editNotifications.error'));
+      })
     } else {
       console.log('editar form invalido')
     }
   }
-
-
-
 }

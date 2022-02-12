@@ -13,6 +13,61 @@
     "loginButton": "Ingresar",
     "loading": "Iniciando Sesion..."
   },
+  "clients": {
+    "list": {
+      "table": {
+        "id": "Id",
+        "firstName": "Nombre",
+        "lastName": "Apellido",
+        "email": "Correo",
+        "birthday": "Fecha de Nacimiento",
+        "phoneNumber": "Telefono",
+        "identityNumber": "Cedula"
+      }
+    },
+    "add": {
+      "title": {
+        "isAdd": "Agregar Cliente",
+        "isEdit": "Editar Cliente"
+      },
+      "firstName": {
+        "title": "Nombre",
+        "errorRequired": "El nombre es requerido"
+      },
+      "lastName": {
+        "title": "Apellido",
+        "errorRequired": "El apellido es requerido"
+      },
+      "email": {
+        "title": "Correo",
+        "errorEmail": "Ingrese un email valido"
+      },
+      "birthday": {
+        "title": "Fecha de Nacimiento"
+      },
+      "phoneNumber": {
+        "title": "Telefono",
+        "errorPattern": "Ingrese un numero de telefono valido"
+      },
+      "identityNumber": {
+        "title": "Cedula",
+        "errorPattern": "Ingrese una cedula valida"
+      },
+      "button": {
+        "isAdd": "Guardar",
+        "isEdit": "Editar"
+      },
+      "loading": "Cargando...",
+      "addNotifications": {
+        "success": "Cliente Guardado!",
+        "error": "Error al guardar"
+      },
+      "editNotifications": {
+        "success": "Cliente Actualizado!",
+        "error": "Error al guardar"
+      }
+    }
+  },
   "prices": {
     "list": {
       "title": "Listado de precios"
@@ -79,14 +134,22 @@
     "enrollment": "Inscripciones",
     "clients": "Clientes",
     "prices": "Precios",
-    "logout":"Cerrar Sesion"
+    "logout": "Cerrar Sesion",
+    "changeLanguage": "Cambiar idioma"
+  },
+  "changeLanguage": "Idioma cambiado a Español",
+  "paginator":{
+    "itemsPerPageLabel": "Elementos por pagina",
+    "nextPageLabel": "Pagina siguiente",
+    "previousPageLabel": "Pagina anterior",
+    "ofLabel": "de"
   },
   "models": {
     "durationType": {
-      "day":{
+      "day": {
         "title": "dia",
         "value": 1
-      } ,
+      },
       "week": {
         "title": "semana",
         "value": 2
@@ -99,6 +162,15 @@
         "title": "año",
         "value": 4
       }
+    },
+    "clients": {
+      "id": "id",
+      "firstName": "",
+      "lastName": "",
+      "email": "",
+      "birthday": "",
+      "phoneNumber": "",
+      "identityNumber": ""
     }
   }
 }

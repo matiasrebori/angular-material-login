@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row text-center my-3">
-    <h1 *ngIf="!esEditar">Agregar Cliente</h1>
-    <h1 *ngIf="esEditar">Editar Cliente</h1>
+    <h1 *ngIf="!esEditar">{{'clients.add.title.isAdd' | translate }}</h1>
+    <h1 *ngIf="esEditar">{{'clients.add.title.isEdit' | translate }}</h1>
   </div>
   <mat-card class="mat-elevation-z8">
     <form class="example-form" [formGroup]="form">
@@ -10,29 +10,26 @@
         <div class="col">
           <!--Nombre-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Nombre</mat-label>
+            <mat-label>{{'clients.add.firstName.title' | translate }}</mat-label>
             <input matInput type="text" formControlName="nombre">
-            <mat-error *ngIf="form.controls['nombre'].hasError('required') && form.controls['nombre'].dirty">
-              Nombre es requerido
+            <mat-error *ngIf="form.controls['nombre'].hasError('required')">
+              {{'clients.add.firstName.errorRequired' | translate }}
             </mat-error>
           </mat-form-field>
           <!--Apellido-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Apellido</mat-label>
+            <mat-label>{{'clients.add.lastName.title' | translate }}</mat-label>
             <input matInput type="text" formControlName="apellido">
             <mat-error *ngIf="form.controls['apellido'].hasError('required')">
-              Apellido es requerido
+              {{'clients.add.lastName.errorRequired' | translate }}
             </mat-error>
           </mat-form-field>
           <!--Correo-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Correo</mat-label>
+            <mat-label>{{'clients.add.email.title' | translate }}</mat-label>
             <input matInput type="email" formControlName="correo">
-            <mat-error *ngIf="form.controls['correo'].hasError('required')">
-              Correo es requerido
-            </mat-error>
             <mat-error *ngIf="form.controls['correo'].hasError('email')">
-              Por favor ingrese un email valido
+              {{'clients.add.email.errorEmail' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -40,39 +37,39 @@
         <div class="col">
           <!--Fecha de Nacimiento-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Fecha de Nacimiento</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento">
+            <mat-label>{{'clients.add.birthday.title' | translate }}</mat-label>
+            <input matInput readonly [matDatepicker]="picker" formControlName="fechaNacimiento">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
-            <mat-error *ngIf="form.controls['fechaNacimiento'].hasError('required')">
-              Ingrese una fecha valida
-            </mat-error>
           </mat-form-field>
           <!--Telefono-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Telefono</mat-label>
+            <mat-label>{{'clients.add.phoneNumber.title' | translate }}</mat-label>
             <input matInput type="text" formControlName="telefono">
-            <mat-error *ngIf="form.controls['telefono'].hasError('required')">
-              Telefono es requerido
+            <mat-error *ngIf="form.controls['telefono'].hasError('pattern')">
+              {{'clients.add.phoneNumber.errorPattern' | translate }}
             </mat-error>
           </mat-form-field>
           <!--Cedula-->
           <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Cedula</mat-label>
+            <mat-label>{{'clients.add.identityNumber.title' | translate }}</mat-label>
             <input matInput type="text" formControlName="cedula">
-            <mat-error *ngIf="form.controls['cedula'].hasError('required')">
-              Cedula es requerido
+            <mat-error *ngIf="form.controls['cedula'].hasError('pattern')">
+              {{'clients.add.identityNumber.errorPattern' | translate }}
             </mat-error>
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <button *ngIf="!esEditar" (click)="onSubmit()" mat-raised-button color="primary" type="submit" class="example-full-width">Guardar</button>
-          <button *ngIf="esEditar" (click)="onEdit()" mat-raised-button color="primary" type="submit" class="example-full-width">Editar</button>
+          <button *ngIf="!esEditar" (click)="onSubmit()" mat-raised-button color="primary" type="submit"
+                  class="example-full-width">{{'clients.add.button.isAdd' | translate }}</button>
+          <button *ngIf="esEditar" (click)="onEdit()" mat-raised-button color="primary" type="submit"
+                  class="example-full-width">{{'clients.add.button.isEdit' | translate }}</button>
         </div>
       </div>
     </form>
-    <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#ff4081" type = "ball-beat" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#ff4081" type="ball-beat" [fullScreen]="true"><p
+      style="color: white"> {{'clients.add.loading' | translate }} </p></ngx-spinner>
   </mat-card>
 </div>

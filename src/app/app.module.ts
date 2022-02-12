@@ -35,6 +35,9 @@ import { InscripcionesAgregarComponent } from './inscripciones-agregar/inscripci
 import { MenuSidenavComponent } from './menu-sidenav/menu-sidenav.component';
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { MenuFooterComponent } from './menu-footer/menu-footer.component';
+import {CustomMatPaginatorIntl} from "./paginator/CustomMatPaginatorIntl";
+import {MatPaginatorIntl} from "@angular/material/paginator";
 
 
 /* translation*/
@@ -57,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PreciosAgregarComponent,
     PreciosModalComponent,
     InscripcionesAgregarComponent,
-    MenuSidenavComponent
+    MenuSidenavComponent,
+    MenuFooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,6 +93,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'es-mx'},
+    { provide: MatPaginatorIntl, useClass: CustomMatPaginatorIntl}
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

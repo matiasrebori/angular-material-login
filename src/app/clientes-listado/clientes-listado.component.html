@@ -1,17 +1,16 @@
-<div class="container-fluid">
-
+<div class="container">
   <div class="row">
     <div class="col">
       <mat-card class="mat-elevation-z8">
         <mat-card-content>
           <div class="row align-items-center">
-            <div class="col-11">
+            <div class="col-10 col-sm-11">
               <mat-form-field appearance="standard">
                 <mat-label>Filtrar</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="" #input>
               </mat-form-field>
             </div>
-            <div class="col-1 text-center">
+            <div class="col-2 col-sm-1 text-center">
               <mat-icon matTooltip="Haz click en una columna para realizar una accion">
                 info
               </mat-icon>

@@ -1,23 +1,17 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from "../services/auth.service";
 import {TranslateService} from "@ngx-translate/core";
 import {NotificationService} from "../services/notification.service";
 
 @Component({
-  selector: 'app-menu-sidenav',
-  templateUrl: './menu-sidenav.component.html',
-  styleUrls: ['./menu-sidenav.component.css']
+  selector: 'app-menu-footer',
+  templateUrl: './menu-footer.component.html',
+  styleUrls: ['./menu-footer.component.css']
 })
-export class MenuSidenavComponent implements OnInit {
-
-  constructor(private authService: AuthService, private translate: TranslateService, private notification: NotificationService) {
+export class MenuFooterComponent implements OnInit {
+  constructor(private translate: TranslateService, private notification:NotificationService) {
   }
 
-  ngOnInit() {
-  }
-
-  logout() {
-    this.authService.logout()
+  ngOnInit(): void {
   }
 
   setLanguageEnglish() {
@@ -34,6 +28,5 @@ export class MenuSidenavComponent implements OnInit {
     this.translate.use('br');
     this.notification.exitoToast(this.translate.instant('changeLanguage'))
   }
-
 
 }

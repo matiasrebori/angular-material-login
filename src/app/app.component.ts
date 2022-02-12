@@ -16,8 +16,8 @@ export class AppComponent implements OnInit {
 
   constructor(private deviceService: DeviceService,
               private auth: AuthService,
-              private translate: TranslateService,
-              private router: Router) {
+              private translate: TranslateService) {
+    // agregar idiomas y setear el idioma por defecto
     translate.addLangs(['es', 'en']);
     translate.setDefaultLang('es');
     translate.use('es');
